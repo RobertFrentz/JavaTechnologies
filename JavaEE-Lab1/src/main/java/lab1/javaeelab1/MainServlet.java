@@ -33,11 +33,17 @@ public class MainServlet extends HttpServlet {
         if (requestMock) {
             out.println(confirmationMessage);
         } else {
+            boolean isDesktopApplication = request.getHeader("Desktop") != null;
             ServletHelper.configWriteInfo(requestKey, requestValue, timestamp, requestSync);
-            List<String> htmlLines = ServletHelper.configReadInfo(requestSync);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("response.jsp");
-            request.setAttribute("lines", htmlLines);
-            dispatcher.forward(request, response);
+            if(isDesktopApplication){
+                out.println(ServletHelper.configReadInfo(requestSync));
+            } else{
+                List<String> htmlLines = ServletHelper.configReadInfo(requestSync);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("response.jsp");
+                request.setAttribute("lines", htmlLines);
+                dispatcher.forward(request, response);
+            }
+
         }
 
 

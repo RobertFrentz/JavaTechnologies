@@ -1,4 +1,6 @@
-<%@ page import="java.util.ArrayList" %><%--
+<%--suppress unchecked --%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Robert
   Date: 10.10.2021
@@ -12,7 +14,7 @@
 </head>
 <body>
 <%
-    ArrayList<String> lines=(ArrayList<String>) request.getAttribute("lines");
+    List<String> lines=(ArrayList<String>) request.getAttribute("lines");
     for (String line: lines) {
 %>
 <tr>
