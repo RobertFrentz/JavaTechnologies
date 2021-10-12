@@ -9,10 +9,10 @@ import java.util.List;
 
 public class ServletHelper {
 
-    public static void configWriteInfo(String key, int value, LocalDateTime timestamp, boolean sync){
+    public void configWriteInfo(String key, int value, LocalDateTime timestamp, boolean sync){
         File file = new File("repository.txt");
         if (sync) {
-            synchronized (file) {
+            synchronized (this) {
                 writeToFile(file, value, key, timestamp);
             }
         } else {
@@ -20,10 +20,21 @@ public class ServletHelper {
         }
     }
 
-    private static void writeToFile(File repo, int value, String key, LocalDateTime timestamp){
+    public List<String> configReadInfo(boolean sync){
+        File file = new File("repository.txt");
+        if (sync) {
+            synchronized (this) {
+                return readAndFormatContent(file);
+            }
+        } else {
+            return readAndFormatContent(file);
+        }
+    }
+
+    private void writeToFile(File file, int value, String key, LocalDateTime timestamp){
         try{
-            boolean result = repo.createNewFile();
-            FileWriter fileWriter = new FileWriter(repo, true);
+            boolean result = file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file, true);
             for (int i = 0; i < value; i++) {
                 fileWriter.append(key).append(" ");
             }
@@ -36,10 +47,10 @@ public class ServletHelper {
         }
     }
 
-    public static List<String> readAndFormatContent() {
-        File file = new File("repository.txt");
+    public List<String> readAndFormatContent(File file) {
         List<String> result = new ArrayList<>();
         try{
+            boolean rs = file.createNewFile();
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
             while( (line = bufferedReader.readLine()) != null){

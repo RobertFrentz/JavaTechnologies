@@ -13,9 +13,11 @@ import jakarta.servlet.annotation.*;
 @WebServlet(name = "mainServlet", value = "/main-servlet")
 public class MainServlet extends HttpServlet {
     private String confirmationMessage;
+    private ServletHelper servletHelper;
 
     public void init() {
         confirmationMessage = "Request received.";
+        servletHelper = new ServletHelper();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -33,8 +35,8 @@ public class MainServlet extends HttpServlet {
         if (requestMock) {
             out.println(confirmationMessage);
         } else {
-            ServletHelper.configWriteInfo(requestKey, requestValue, timestamp, requestSync);
-            List<String> htmlLines = ServletHelper.readAndFormatContent();
+            servletHelper.configWriteInfo(requestKey, requestValue, timestamp, requestSync);
+            List<String> htmlLines = servletHelper.configReadInfo(requestSync);
             RequestDispatcher dispatcher = request.getRequestDispatcher("response.jsp");
             request.setAttribute("lines", htmlLines);
             dispatcher.forward(request, response);
