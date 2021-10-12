@@ -10,20 +10,26 @@ import java.util.List;
 public class ServletHelper {
 
     public static void configWriteInfo(String key, int value, LocalDateTime timestamp, boolean sync){
-        File file = new File("repository.txt");
         if (sync) {
-            synchronized (file) {
-                writeToFile(file, value, key, timestamp);
-            }
+                writeToFileSync(value, key, timestamp);
         } else {
-            writeToFile(file, value, key, timestamp);
+            writeToFile(value, key, timestamp);
         }
     }
 
-    private static void writeToFile(File repo, int value, String key, LocalDateTime timestamp){
+    public static List<String> configReadInfo(boolean sync){
+        if (sync) {
+            return readAndFormatContentSync();
+        } else {
+            return readAndFormatContent();
+        }
+    }
+
+    private synchronized static void writeToFileSync(int value, String key, LocalDateTime timestamp){
         try{
-            boolean result = repo.createNewFile();
-            FileWriter fileWriter = new FileWriter(repo, true);
+            File file = new File("repository.txt");
+            boolean result = file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file, true);
             for (int i = 0; i < value; i++) {
                 fileWriter.append(key).append(" ");
             }
@@ -34,6 +40,39 @@ public class ServletHelper {
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    private static void writeToFile(int value, String key, LocalDateTime timestamp){
+        try{
+            File file = new File("repository.txt");
+            boolean result = file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file, true);
+            for (int i = 0; i < value; i++) {
+                fileWriter.append(key).append(" ");
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            fileWriter.append(timestamp.format(formatter));
+            fileWriter.append("\n");
+            fileWriter.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized static List<String> readAndFormatContentSync() {
+        File file = new File("repository.txt");
+        List<String> result = new ArrayList<>();
+        try{
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line;
+            while( (line = bufferedReader.readLine()) != null){
+                result.add(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Collections.sort(result);
+        return result;
     }
 
     public static List<String> readAndFormatContent() {

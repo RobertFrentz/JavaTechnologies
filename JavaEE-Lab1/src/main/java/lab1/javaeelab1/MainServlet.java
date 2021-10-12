@@ -34,7 +34,7 @@ public class MainServlet extends HttpServlet {
             out.println(confirmationMessage);
         } else {
             ServletHelper.configWriteInfo(requestKey, requestValue, timestamp, requestSync);
-            List<String> htmlLines = ServletHelper.readAndFormatContent();
+            List<String> htmlLines = ServletHelper.configReadInfo(requestSync);
             RequestDispatcher dispatcher = request.getRequestDispatcher("response.jsp");
             request.setAttribute("lines", htmlLines);
             dispatcher.forward(request, response);
