@@ -9,6 +9,6 @@
 <br/>
 <p>Click below</p>
 <a href="controller-servlet?name=input">Input</a><br>
-<a href="controller-servlet?name=response">Response</a>
+<a href="controller-servlet?name=result">Result</a>
 </body>
 </html>

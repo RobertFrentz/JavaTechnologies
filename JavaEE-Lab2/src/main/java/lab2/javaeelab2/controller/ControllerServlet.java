@@ -25,7 +25,7 @@ public class ControllerServlet extends HttpServlet {
         if(name != null && name.equals("input")) {
             request.setAttribute("category",new Category("Drama"));
             request.getRequestDispatcher("/view/" + name + ".jsp").forward(request, response);
-        } else if(name != null && name.equals("response")){
+        } else if(name != null && name.equals("result")){
             request.setAttribute("recordsData", RecordsFileRepository.readRecordsFromFile());
             request.getRequestDispatcher("/view/" + name + ".jsp").forward(request, response);
         }
