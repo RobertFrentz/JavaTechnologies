@@ -1,12 +1,12 @@
 package lab3ee.labee3.Model;
 
-import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@ManagedBean("exam")
+@Named
 @SessionScoped
 public class Exam implements Serializable {
 

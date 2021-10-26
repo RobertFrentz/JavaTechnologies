@@ -1,11 +1,7 @@
 package lab3ee.labee3.Model;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import lab3ee.labee3.Services.ExamService;
-import lab3ee.labee3.Services.StudentService;
 
 import java.io.Serializable;
 import java.util.List;

@@ -31,7 +31,7 @@ public class SingletonRepository {
         return repository;
     }
 
-    public  List<Student> getStudents(){
+    public List<Student> getStudents(){
         ResultSet rs;
         PreparedStatement pst;
         String stm = "select * from students";
@@ -55,7 +55,7 @@ public class SingletonRepository {
         return students;
     }
 
-    public  List<Exam> getExams(){
+    public List<Exam> getExams(){
         ResultSet rs;
         PreparedStatement pst;
         String stm = "select * from exams";
