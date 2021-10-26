@@ -23,4 +23,6 @@
     - Created the SingletonRepository class that is designed using the Singleton pattern and contains functionality for retrieving information from a PostgreSQL database. The connection is established using PostgreSQL jdbc driver.
     - Created the ExamService class with the purpose of creating an intermediary between the data acces repository and the model class removing the unwanted depedency between a model class and external details like database access service. Exams information is obtained through the SingletonRepository instance.
     - Created the StudentService class with the purpose of creating an intermediary between the data acces repository and the model class removing the unwanted depedency between a model class and external details like database access service. Students information is obtained through the SingletonRepository instance.
-   \(Side note: Unfortunately, I encountered several configuration problems when using the frameworks Primefaces and Bootsfaces but I hope to find a solution for the next laboratory.\)
+    - (Side note: Unfortunately, I encountered several configuration problems when using the frameworks Primefaces and Bootsfaces but I hope to find a solution for the next laboratory.)
+  
+
