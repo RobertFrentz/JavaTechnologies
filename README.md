@@ -16,7 +16,7 @@
 ## Lab 3 - Work
   * Created the jsf pages, beans, jdbc connection and other server-side components in accordance with the first bullet point from the lab page.
     - Created the "exam.xhtml" jsf page with the purpose of displaying the existing exams using the jsf core and html library. The information is displayed in a data table.
-    - Created the "students.xhtml" jsf page with the purpose of displaying the existing students using the jsf core and html library. The information is displayed in a data table.
+    - Created the "students.xhtml" jsf page with the purpose of displaying the existing students using the jsf core,html and facelets library. The information is displayed in a data table.
     - Created the model class "Exam" and annotated it with "@Named" and "@SessionScoped" with the purpose of being viewed as a bean.
     - Created the model class "Student" and annotated it with "@Named" and "@SessionScoped" with the purpose of being viewed as a bean.
     - Created the model class "Session" and annotated it with "@Named" (with a custom name) and "@SessionScoped" with the purpose of being viewed as a bean. Specific for this class are the services that are injected using the @Injected annotation and the "init()" method annotated with @PostConstruct. The main purpose for this additional functionality is to provide the bean a safe use of depedencies (ExamService, StudentService) only after the bean is initialiazed. The "init()" method is called only once when the bean is first referenced in a page.
