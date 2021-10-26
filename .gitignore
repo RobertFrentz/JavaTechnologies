@@ -23,3 +23,6 @@
 hs_err_pid*
 JavaEE-Lab1/.idea
 JavaEE-Lab2/.idea
+.idea
+/target
+target
