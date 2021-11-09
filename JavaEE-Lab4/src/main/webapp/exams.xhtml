@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Robert
+  Date: 25.10.2021
+  Time: 23:41
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:my="http://xmlns.jcp.org/jsf/composite/components"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="WEB-INF/templates/dataView.xhtml">
+    <ui:define name="dataViewContent">
+        <my:dataTable dataView="#{customSession.exams}" title="exams">
+            <p:column headerText="Name">
+                #{item.name}
+            </p:column>
+            <p:column headerText="Date">
+                #{item.startingTime}
+            </p:column>
+            <p:column headerText="Duration">
+                #{item.duration}
+            </p:column>
+        </my:dataTable>
+    </ui:define>
+</ui:composition>
+
+<!--<h:head>
+    <title>Exams</title>
+    <h:outputStylesheet library="css" name="styles.css"/>
+</h:head>
+
+<h:body>
+
+    <p:dataTable id="data" value="#{customSession.exams}" var="exam"
+                 styleClass="table"
+                 headerClass="table-header"
+                 rowClasses="table-row">
+        <p:column>
+            <f:facet name="header">Name</f:facet>
+            #{exam.name}
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">Starting time</f:facet>
+            #{exam.startingTime}
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">Duration</f:facet>
+            #{exam.duration}
+        </p:column>
+    </p:dataTable>
+</h:body>-->
+
+</html>
