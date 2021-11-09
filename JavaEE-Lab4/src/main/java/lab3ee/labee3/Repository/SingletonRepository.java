@@ -19,28 +19,28 @@ public class SingletonRepository {
     @Resource(name = "jdbc/db")
     private DataSource dataSource;
 
-    private SingletonRepository(){
+    private SingletonRepository() {
         try {
-            /*Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5432/JavaEE";*/
+/*            Class.forName("org.postgresql.Driver");
+            String url = "jdbc:postgresql://localhost:5432/JavaEE";
             String user = "postgres";
             String password = "student";
-            /*connection = DriverManager.getConnection(url, user, password);*/
-            connection = dataSource.getConnection(user, password);
-            System.out.println(connection.toString());
+            connection = DriverManager.getConnection(url, user, password);*/
+            connection = dataSource.getConnection();
+            //System.out.println(connection.toString());
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public static SingletonRepository getInstance(){
-        if(repository == null){
+    public static SingletonRepository getInstance() {
+        if (repository == null) {
             repository = new SingletonRepository();
         }
         return repository;
     }
 
-    public List<Student> getStudents(){
+    public List<Student> getStudents() {
         ResultSet rs;
         PreparedStatement pst;
         String stm = "select * from lab3.students";
@@ -51,13 +51,15 @@ public class SingletonRepository {
             pst.execute();
             rs = pst.getResultSet();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Student student = new Student();
                 student.setName(rs.getString(1));
                 student.addExam(rs.getString(2));
                 System.out.println(student.toString());
                 students.add(student);
             }
+            rs.close();
+            pst.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -65,7 +67,7 @@ public class SingletonRepository {
         return students;
     }
 
-    public List<Exam> getExams(){
+    public List<Exam> getExams() {
         ResultSet rs;
         PreparedStatement pst;
         String stm = "select * from lab3.exams";
@@ -76,7 +78,7 @@ public class SingletonRepository {
             pst.execute();
             rs = pst.getResultSet();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Exam exam = new Exam();
                 exam.setName(rs.getString(1));
                 exam.setStartingTime(rs.getDate(2));
@@ -84,6 +86,8 @@ public class SingletonRepository {
                 System.out.println(exam.toString());
                 exams.add(exam);
             }
+            rs.close();
+            pst.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

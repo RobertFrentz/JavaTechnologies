@@ -7,37 +7,17 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:my="http://xmlns.jcp.org/jsf/composite/components"
       xmlns:p="http://primefaces.org/ui">
-<!--<ui:composition template="WEB-INF/templates/dataView.xhtml">
+<ui:composition template="WEB-INF/templates/dataView.xhtml">
     <ui:define name="dataViewContent">
-        <my:dataTable dataView="#{customSession.students}">
+        <my:dataTable dataView="#{customSession.students}" title="Students">
             <p:column headerText="Name">
-                <h:outputText value="#{item}">
-
-                </h:outputText>
+                #{item.name}
+            </p:column>
+            <p:column headerText="Exams">
+                #{item.exams}
             </p:column>
         </my:dataTable>
     </ui:define>
-</ui:composition>-->
+</ui:composition>
 
-<h:head>
-    <title>Students</title>
-    <h:outputStylesheet library="css" name="styles.css"/>
-</h:head>
-
-<h:body>
-
-    <p:dataTable var="student" value="#{customSession.students}"
-                 styleClass="table"
-                 headerClass="table-header"
-                 rowClasses="table-row">
-        <p:column>
-            <f:facet name="header">Name</f:facet>
-            #{student.name}
-        </p:column>
-        <p:column>
-            <f:facet name="header">Exams name</f:facet>
-            #{student.exams}
-        </p:column>
-    </p:dataTable>
-</h:body>
 </html>
