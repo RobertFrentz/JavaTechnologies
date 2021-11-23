@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Robert
+  Date: 25.10.2021
+  Time: 23:41
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:my="http://xmlns.jcp.org/jsf/composite/components"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="WEB-INF/templates/dataView.xhtml">
+    <ui:define name="dataViewContent">
+        <my:dataTable dataView="#{customSession.exams}" title="Exams">
+            <p:column headerText="Name">
+                #{item.name}
+            </p:column>
+            <p:column headerText="Date">
+                #{item.startingTime}
+            </p:column>
+            <p:column headerText="Duration">
+                #{item.duration}
+            </p:column>
+        </my:dataTable>
+    </ui:define>
+</ui:composition>
+
+</html>
