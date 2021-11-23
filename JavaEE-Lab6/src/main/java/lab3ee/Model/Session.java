@@ -83,9 +83,12 @@ public class Session implements Serializable {
         selectedExam = updateExamName(selectedExam);
         List<Integer> selectedQuantities = new ArrayList<>();
         for (Resource resource : resources) {
-            selectedQuantities.add(Integer.parseInt(resource.getSelectedQuantity()));
+            if(resourceService.isResourceAvailable(resource)){
+                selectedQuantities.add(Integer.parseInt(resource.getSelectedQuantity()));
+                resourceLog.updateMap(resource);
+            }
         }
-        resourceLog.updateMap(resources);
+        //resourceLog.updateMapList(resources);
         resourceService.assignResources(resources, selectedExam, selectedQuantities);
     }
 

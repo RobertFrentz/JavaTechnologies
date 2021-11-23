@@ -39,4 +39,7 @@ public class ResourceService {
         //System.out.println("Here I am!");
     }
 
+    public boolean isResourceAvailable(Resource resource){
+        return resourcesRepositoryStateless.isResourceAvailable(DataMapper.ResourceToEntity(resource));
+    }
 }

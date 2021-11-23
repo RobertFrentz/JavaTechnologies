@@ -33,7 +33,17 @@ public class SingletonResourcesLog {
     }
 
     @Lock(LockType.WRITE)
-    public void updateMap(List<Resource> resources){
+    public void updateMap(Resource resource){
+        if(resourceMap.containsKey(resource.getName())){
+            resourceMap.put(resource.getName(), resourceMap.get(resource.getName()) + resource.getExam());
+        } else{
+            resourceMap.put(resource.getName(), resource.getExam());
+        }
+        System.out.println(resourceMap.toString());
+    }
+
+    @Lock(LockType.WRITE)
+    public void updateMapList(List<Resource> resources){
         for(Resource resource: resources){
             if(resourceMap.containsKey(resource.getName())){
                 resourceMap.put(resource.getName(), resourceMap.get(resource.getName()) + resource.getExam());
