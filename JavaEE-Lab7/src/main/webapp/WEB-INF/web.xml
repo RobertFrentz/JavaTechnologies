@@ -17,8 +17,15 @@
         <param-name>primefaces.UPLOADER</param-name>
         <param-value>native</param-value>
     </context-param>
+    <context-param>
+        <param-name>jakarta.faces.CONFIG_FILES</param-name>
+        <param-value>
+            /WEB-INF/faces-config.xml
+        </param-value>
+    </context-param>
+
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>login.xhtml</welcome-file>
     </welcome-file-list>
     <resource-ref>
         <res-ref-name>jdbc/db</res-ref-name>

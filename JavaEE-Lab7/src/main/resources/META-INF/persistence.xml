@@ -7,5 +7,6 @@
     <jta-data-source>jdbc/db</jta-data-source>
     <class>lab3ee.Entities.Student</class>
     <class>lab3ee.Entities.Exam</class>
+    <class>lab3ee.Model.User</class>
   </persistence-unit>
 </persistence>
