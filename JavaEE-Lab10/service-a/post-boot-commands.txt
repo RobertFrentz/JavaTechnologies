@@ -1,0 +1,5 @@
+create-jdbc-connection-pool --datasourceclassname org.postgresql.ds.PGSimpleDataSource --restype javax.sql.DataSource dbPost
+set resources.jdbc-connection-pool.dbPost.property.password=student resources.jdbc-connection-pool.dbPost.property.databaseName=postgres resources.jdbc-connection-pool.dbPost.property.serverName=172.17.0.3 resources.jdbc-connection-pool.dbPost.property.user=postgres resources.jdbc-connection-pool.dbPost.property.portNumber=5432
+
+create-jdbc-resource --enabled=true --poolName=dbPost --target=domain jdbc/db
+create-resource-ref --enabled=true --target=server jdbc/db

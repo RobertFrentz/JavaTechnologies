@@ -5,6 +5,9 @@ import com.lab9EEjava.JavaLab9EE.services.AddDocumentService;
 import com.lab9EEjava.JavaLab9EE.services.DeleteDocumentService;
 import com.lab9EEjava.JavaLab9EE.services.UpdateDocumentService;
 import com.lab9EEjava.JavaLab9EE.services.ViewDocumentService;
+import org.eclipse.microprofile.metrics.MetricRegistry;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -35,6 +38,9 @@ public class DocumentsController {
 
     @Inject
     private ViewDocumentService viewDocumentService;
+
+    @Inject
+    private MetricRegistry metricRegistry;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -70,6 +76,7 @@ public class DocumentsController {
         return document;
     }
 
+    @Timed(name = "durationToGetAllDocuments")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @APIResponses(value = {
@@ -77,6 +84,7 @@ public class DocumentsController {
             @APIResponse(responseCode = "500", description = "Internal service error") })
     @Operation(summary = "Get user specific documents", description = "Get user specific documents")
     public List<Document> getAllDocuments(){
+        metricRegistry.counter("getAllDocumentsCounter").inc();
         return viewDocumentService.getAllDocuments();
     }
 

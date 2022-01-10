@@ -3,8 +3,11 @@ package com.lab9EEjava.JavaLab9EE.resilient;
 import org.eclipse.microprofile.faulttolerance.*;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
@@ -43,15 +46,16 @@ public class ResilienceController {
             successThreshold = 10,
             requestVolumeThreshold = 4,
             failureRatio=0.75,
-            delay = 1000)
+            delay = 20000)
     @Path("/circuitBreaker")
     @Fallback(fallbackMethod = "fallbackCircuitBreaker")
-    @GET
-    public String circuitBreakerTestWithFallback() {
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String circuitBreakerTestWithFallback(RequestBody requestBody) throws NumberFormatException {
         try {
-            Thread.sleep(5000L);
-        } catch (InterruptedException e) {
-            //
+            int a = Integer.parseInt(requestBody.testString);
+        } catch (NumberFormatException e) {
+            throw e;
         }
         return "Never from normal processing";
     }
@@ -91,7 +95,7 @@ public class ResilienceController {
         return "Fallback answer due to timeout + retry";
     }
 
-    public String fallbackCircuitBreaker() {
+    public String fallbackCircuitBreaker(RequestBody requestBody) {
         return "Fallback answer due to circuit breaker";
     }
 
@@ -102,5 +106,10 @@ public class ResilienceController {
     public Future<String> fallBackBulkheadThreadPool() {
         return CompletableFuture.completedFuture("Fallback answer due to bulkhead thread pool maximum concurrent requests allowed " +
                 "or maximum requests allowed in waiting queue");
+    }
+
+    public static class RequestBody {
+        int id;
+        String testString;
     }
 }
